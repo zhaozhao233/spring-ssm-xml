@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
 <!--testing 分支在这里修改-->
+<!--    testing 分支再次修改-->
     <modules>
         <module>spring-ssm-xml-entity</module>
         <module>spring-ssm-xml-web</module>
