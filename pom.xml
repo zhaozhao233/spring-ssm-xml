@@ -11,6 +11,7 @@
 
 <!--master 分支添加-->
 <!--          github 再这里进行操作 -->
+<!--          冲突 -->
 <!--    master 分支怎么添加不进去？-->
     <modules>
         <module>spring-ssm-xml-entity</module>
