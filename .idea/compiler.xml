@@ -6,15 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-ssm-xml-entity" />
         <module name="spring-ssm-xml-child-service" />
-        <module name="spring-ssm-xml-child-entity" />
+        <module name="spring-ssm-xml-service" />
         <module name="spring-ssm-xml-child-dao" />
         <module name="spring-ssm-xml-dao" />
-        <module name="spring-ssm-xml-service" />
-        <module name="spring-ssm-xml-child-web" />
-        <module name="spring-ssm-xml-web" />
         <module name="spring-servlet3" />
+        <module name="spring-ssm-xml-child-entity" />
+        <module name="spring-ssm-xml-child-web" />
+        <module name="spring-ssm-xml-entity" />
+        <module name="spring-ssm-xml-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
