@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+<!--导入db.properties文件，为了避免和其他奇奇怪怪的文件冲突，设置覆盖属性local-override-->
+    <context:property-placeholder location="classpath:db.properties" local-override="true"></context:property-placeholder>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="filters" value="stat"/>
+
+        <property name="maxActive" value="20"/>
+        <property name="initialSize" value="1"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="1"/>
+
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxOpenPreparedStatements" value="20"/>
+        <property name="asyncInit" value="true"/>
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:*Mapper.xml" />
+<!--        分页-->
+        <property name="plugins">
+            <list>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="supportMethodsArguments">true</prop>
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </list>
+        </property>
+<!--        日志-->
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="logImpl"
+                          value="org.apache.ibatis.logging.stdout.StdOutImpl"></property>
+                <property name="mapUnderscoreToCamelCase" value="true"></property>
+            </bean>
+        </property>
+    </bean>
+
+<!--    扫描 mybatis 的dao-->
+    <mybatis:scan base-package="com.nf.demo.dao"/>
+
+</beans>

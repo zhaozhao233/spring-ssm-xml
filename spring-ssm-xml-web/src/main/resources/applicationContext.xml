@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <import resource="classpath*:dao-spring.xml"/>
+<!--    扫描-->
+    <context:component-scan base-package="com.nf.demo.controller"/>
+    <context:component-scan base-package="com.nf.demo.service.impl" />
+
+<!--    启用注解的方式-->
+    <mvc:annotation-driven />
+<!--    资源视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+<!--&lt;!&ndash;    扫描外部文件&ndash;&gt;-->
+<!--    <context:property-placeholder location="classpath:db.properties" />-->
+<!--    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">-->
+<!--        <property name="url" value="${jdbc.url}"/>-->
+<!--        <property name="username" value="${jdbc.username}" />-->
+<!--        <property name="password" value="${jdbc.password}" />-->
+<!--        <property name="driverClassName" value="${jdbc.driver}" />-->
+
+<!--        <property name="filters" value="stat"/>-->
+
+<!--        <property name="maxActive" value="20"/>-->
+<!--        <property name="initialSize" value="1"/>-->
+<!--        <property name="maxWait" value="60000"/>-->
+<!--        <property name="minIdle" value="1"/>-->
+
+<!--        <property name="timeBetweenEvictionRunsMillis" value="60000"/>-->
+<!--        <property name="minEvictableIdleTimeMillis" value="300000"/>-->
+
+<!--        <property name="testWhileIdle" value="true"/>-->
+<!--        <property name="testOnBorrow" value="false"/>-->
+<!--        <property name="testOnReturn" value="false"/>-->
+
+<!--        <property name="poolPreparedStatements" value="true"/>-->
+<!--        <property name="maxOpenPreparedStatements" value="20"/>-->
+<!--        <property name="asyncInit" value="true"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--&lt;!&ndash;        找到mapper文件&ndash;&gt;-->
+<!--        <property name="mapperLocations" value="classpath:*Magger.xml"/>-->
+<!--&lt;!&ndash;        分页&ndash;&gt;-->
+<!--        <property name="plugins">-->
+<!--            <list>-->
+<!--                <bean class="com.github.pagehelper.PageInterceptor">-->
+<!--                    <property name="properties">-->
+<!--                        <props>-->
+<!--                            <prop key="supportMethodsArguments">true</prop>-->
+<!--                            <prop key="reasonable">true</prop>-->
+<!--                        </props>-->
+<!--                    </property>-->
+<!--                </bean>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--&lt;!&ndash;        日志&ndash;&gt;-->
+<!--        <property name="configuration">-->
+<!--            <bean class="org.apache.ibatis.session.Configuration">-->
+<!--                <property name="logImpl" value="org.apache.ibatis.logging.stdout.StdOutImpl"/>-->
+<!--                <property name="mapUnderscoreToCamelCase" value="true" />-->
+<!--            </bean>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--    <mybatis:scan base-package="com.nf.demo.dao.StudentDao" />-->
+
+<!--    配置事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+
+    </bean>
+<!--    启用事务-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <mvc:resources mapping="/static/**" location="classpath:/static/" />
+
+<!--    创建转换服务（格式化器）-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <list>
+                <bean class="org.springframework.format.datetime.DateFormatter">
+                    <property name="pattern" value="yyyy-MM-dd"/>
+                </bean>
+<!--                <bean class="自定义的格式化器" />-->
+            </list>
+        </property>
+    </bean>
+<!--    配置转换服务-->
+    <mvc:annotation-driven conversion-service="conversionService" />
+
+</beans>

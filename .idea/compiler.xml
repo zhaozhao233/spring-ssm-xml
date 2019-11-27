@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-ssm-xml-entity" />
+        <module name="spring-ssm-xml-child-service" />
+        <module name="spring-ssm-xml-child-entity" />
+        <module name="spring-ssm-xml-child-dao" />
+        <module name="spring-ssm-xml-dao" />
+        <module name="spring-ssm-xml-service" />
+        <module name="spring-ssm-xml-child-web" />
+        <module name="spring-ssm-xml-web" />
+        <module name="spring-servlet3" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="spring-houzi" target="1.5" />
+      <module name="spring-serlvet3-test" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
