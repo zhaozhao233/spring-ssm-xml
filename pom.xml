@@ -8,7 +8,6 @@
     <artifactId>spring-ssm-xml</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-
 <!--master 分支添加-->
     <modules>
         <module>spring-ssm-xml-entity</module>
